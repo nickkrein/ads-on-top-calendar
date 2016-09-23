@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
+import UserImage from './UserImage.js';
 
 const ItemTypes = {
   USERIMAGE: 'userImage'
@@ -7,17 +8,15 @@ const ItemTypes = {
 
 const dropTarget = {
   drop(props, monitor, component) {
-  	component.setState({
-  		test: '111'
-  	});
   	return {};
   }
 };
 
 function collect(connect, monitor) {
+	if (monitor.getItem()) console.log(monitor.getItem());
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
+    isOver: monitor.isOver(),
   };
 }
 
@@ -30,12 +29,12 @@ class TimeSlot extends Component {
     super(props);
   }
 
-
   render() {
   	const { connectDropTarget, isOver } = this.props;
     return connectDropTarget (
       <div className="timeslot" >
       	{this.props.time}
+      	{ isOver ? <UserImage /> : false }
       </div>
     );
   }

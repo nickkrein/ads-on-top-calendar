@@ -1,19 +1,44 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
+import { DropTarget } from 'react-dnd';
 
-export default class TimeSlot extends React.Component {
+const ItemTypes = {
+  USERIMAGE: 'userImage'
+};
+
+const dropTarget = {
+  drop(props, monitor, component) {
+  	component.setState({
+  		test: '111'
+  	});
+  	return {};
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver()
+  };
+}
+
+class TimeSlot extends Component {
   static propTypes = {
-    time: React.PropTypes.string,
+    time: PropTypes.string,
   };
 
   constructor(props) {
     super(props);
   }
 
+
   render() {
-    return (
-      <div className="timeslot">
+  	const { connectDropTarget, isOver } = this.props;
+    return connectDropTarget (
+      <div className="timeslot" >
       	{this.props.time}
       </div>
     );
   }
 }
+
+export default DropTarget(ItemTypes.USERIMAGE, dropTarget, collect)(TimeSlot);

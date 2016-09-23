@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Calendar from './components/Calendar.js';
 import Schedule from './components/Schedule.js';
+import UserImage from './components/UserImage.js';
 
-import './styles/main.scss'
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
-export default class App extends React.Component {
+
+
+class App extends Component {
   static propTypes = {
 
   };
@@ -32,16 +36,17 @@ export default class App extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div className="app">
 	      <div className="top-container">
 	      		<Calendar selectedDay={this.state.selectedDay} handleDayClick={this.handleDayClick} />
-	      		<img src="http://img00.deviantart.net/35aa/i/2014/284/a/4/final_fantasy_7_cloud_sprite_wallart_by_gemogo-d80m5k4.jpg" width="100px" height="100px" />
+	      		<UserImage />
 	      </div>
       	<Schedule />
       </div>
     );
   }
 }
+
+export default DragDropContext(HTML5Backend)(App);

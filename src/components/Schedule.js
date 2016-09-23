@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TimeSlot from './TimeSlot.js';
 
-export default class Schedule extends React.Component {
+export default class Schedule extends Component {
   static propTypes = {
 
   };
